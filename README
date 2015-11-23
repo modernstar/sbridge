@@ -1,0 +1,11 @@
+SBridge is a project created by Regulus Labs for their modem pool product.
+http://www.reguluslabs.com/products/sbridge-modem-pool
+
+This is a simple audio/data bridge between Sangoma telephony devices in PRI links and the TCP network.
+
+TCP Server <-----> SBridge <-----> PRI Link (ie PSTN)
+All raw data read from the PSTN is sent to the TCP server, whether is voice or data, and viceversa. Currently SBridge supports voice and V.110 calls only.
+
+There is some initial V.32 code but was never finished, feel free to complete it :-)
+
+There is no much plans for expansion now, but if you have a feature request, does not hurt to ask.

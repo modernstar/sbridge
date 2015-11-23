@@ -1,0 +1,336 @@
+commit 17841c239eea352ef310852c912142d2631c52eb
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Fri Jun 26 22:53:35 2009 -0500
+
+    removed hangup linked list in favor of on_loop callback that will take care of hanging up channels
+
+commit 2689da8c3b407d15c676775d9094be4951447963
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 25 22:53:03 2009 -0500
+
+    added code to ignore most signals trying to avoid abnormal termination
+
+commit 5358143cfdb7ceab0412f4934081332cd511de18
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 25 21:51:34 2009 -0500
+
+    new code to execute generic applications depending on the call type,
+        added voice echo application
+
+commit ff3dc31b96e31a3ce4bbe4916e7486cb0c014d42
+Author: root <root@modempool.(none)>
+Date:   Sun Jun 21 08:03:32 2009 +0300
+
+    sbridge g711 and user space implementation of transcoding
+
+commit 512c0c39bee49d9ccbc4ffd63354a58f7facf39d
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Sat Jun 20 20:44:01 2009 -0500
+
+    fixed small bug in outgoing v32 frame size
+
+commit cc2faa70883d0018ccd0c590df2e774abbe49045
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 18 23:58:14 2009 -0500
+
+    added some references about V.110
+
+commit 0d29be933af45fd7276275809f0294246044bfb5
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 18 23:02:16 2009 -0500
+
+    use PRI call type to decide if its a v.110 or v.32 call
+
+commit b7f052e9b4429bd60bb4ede3de662301a6f91a2b
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 18 22:07:12 2009 -0500
+
+    added code to use the new v32 interface, may or may not work
+
+commit 51c8eff0ccc55a7b778e30859bde9b0f39a3803b
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 18 17:16:40 2009 -0500
+
+    included new files v32_int.c and v32_int.h for new v32 interface
+
+commit 3e7084cbee275a6adc6f6fc28c6eaf1cca6d8a3c
+Author: root <root@modempool.(none)>
+Date:   Wed Jun 17 08:02:20 2009 +0300
+
+    fixed bug where running was not being set, also added comments about how
+    to handle v.32 and v.110 calls apart
+
+commit 4a5e88fbd9b6d21cb52080e7cbe10bcccf3965aa
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Fri Jun 12 00:09:47 2009 -0500
+
+    added first serious v32 code, still incomplete though, have questions
+    about the interface
+
+commit 5b711bf1a5392d83a2b897037411b6a38b13832e
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 11 17:55:28 2009 -0500
+
+    fixed return value of sbridge_media_write, fixes bug introduced in
+    previous commit
+
+commit b451e61c2cd8d965ad017322303f650b1630bb83
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 11 00:56:28 2009 -0500
+
+    refactored sbridge_media and v110 to properly abstract read and write media routines
+
+commit 0c6521ad3cb9762a1feb0c8adce22a1f430e0f65
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Wed Jun 10 10:31:01 2009 -0500
+
+    Added new v14 code
+
+commit 1cf239b6d7d6ccae128d23a70b2bbd7d8f591643
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Tue Jun 9 22:27:04 2009 -0500
+
+    added libpri with LLC capabilities
+
+commit 8cc4469b89b2b79210784e928c49d918ed6f4010
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Tue Jun 9 22:00:11 2009 -0500
+
+    Added v32 source directory and integrated into the build
+
+commit c3711aa3c90c0d3493a236a15c54f3b41a403596
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Fri Jun 5 23:00:01 2009 -0500
+
+    added TODO file
+
+commit 682d3ad788b009e7853844d22269c367afeb570b
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Fri Jun 5 16:20:49 2009 -0500
+
+    speed up hangup channels linked list, new elements are now added at the
+    head and just dequeued when hanging up all channels
+
+commit 2baa499a93aa02d729f6bb1bc64c9d15fd9cf5fb
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Fri Jun 5 16:09:10 2009 -0500
+
+    added new lock to sangoma_pri.c and improved concurrency handling in
+    main.c and media.c
+
+commit 7a1836fa63824352aac2f4f5d5ed7b6abc23a5d2
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Fri Jun 5 10:44:25 2009 -0500
+
+    avoid issuing a system call while holding a spinlock, use currtime
+    instead of sbridge_time() call
+
+commit cb79ef8904367b76917ed84327abbafcc16a4bb3
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Fri Jun 5 10:41:26 2009 -0500
+
+    use a mutex for hangup channel list protection, spinlock not a good idea
+    if allocating memory
+
+commit aab5551dfd797c232269f056922f679b17218d76
+Author: root <root@modempool.(none)>
+Date:   Fri Jun 5 08:25:36 2009 +0300
+
+    bunch of fixes to actually make work the past commits in the field
+
+commit 2590cbe476e112955ae455680c272a3903fe1065
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 23:10:32 2009 -0500
+
+    added install script and fixed config file
+
+commit 30aeeea5d469a73395c614c77ef9f7fdd1c385b5
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 23:00:23 2009 -0500
+
+    fix loglevel displaying
+
+commit 8e86acbc38ca621ebc56430020e5cc8dc58ba822
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 22:46:15 2009 -0500
+
+    added blacklist support with sqlite3 database
+
+commit 490ecef8a9dfb1523d1e683d30ce774191056eeb
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 21:33:55 2009 -0500
+
+    added sbridge.db sqlite3 database
+
+commit 9922a09e9bf5a9e33ab3d8b7dabf489381ee6a8b
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 21:22:35 2009 -0500
+
+    added safer signal handling with sigaction
+
+commit 6a6fee249f7f5cfb495368e1e9d6be971ccff1a1
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 10:31:05 2009 -0500
+
+    updated comments in sample config and fixed host disable time to be 10
+    minutes
+
+commit 65ef40c58c916de6e790f1a2ebba4f0344f0a0f5
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 09:59:10 2009 -0500
+
+    fixed debian script to match previous changes to environment parameters
+
+commit 98b66c77a223e0295bdb52027c9507ea79f6c096
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 09:50:27 2009 -0500
+
+    improved log level parsing and added proper defaults to sbridge.conf
+    sample file
+
+commit 398c9d142312e11bc773f1de4c50f532c134e2f6
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 00:49:28 2009 -0500
+
+    disable any host when connect() fails
+
+commit 1e31c799354ba0c60a7206480adaa654b2d7e42e
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu Jun 4 00:39:35 2009 -0500
+
+    Huge refactoring of code to include new configuration, host redundancy
+    and other goodies, this is untested
+
+commit c8f8dc5fbfd2f6333cc7bbf916e5a6585494e973
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Tue Jun 2 00:42:38 2009 -0500
+
+    improved sangoma_pri to fit better sangoma bridge daemon
+
+commit 520b966fb1dacba99fe5856aa8dbcd09f6a42e94
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Tue Jun 2 00:10:39 2009 -0500
+
+    added sangoma_pri, it's better to have it here to debug and improve
+
+commit 5ea5cf60ca133f57c336b4a11d3252bce4ac8481
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Tue Jun 2 00:08:57 2009 -0500
+
+    dummy commit that is broken, I forgot to add sangoma_pri.c
+
+commit 50f28a8f9124f4933f051587f0c0fa958380132c
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Tue Jun 2 06:21:22 2009 +0300
+
+    added core limit settings and debug as default logging level
+
+commit ac0c517c861fe5246509b4c62ddb1518ad5233e9
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Sun May 31 07:41:55 2009 +0300
+
+    updated init debian script
+
+commit cfe15ce066aab7130504982184a3e7a342c0387a
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Sun May 31 07:39:54 2009 +0300
+
+    added sbridge init file for debian and updated config to include daemon
+    options
+
+commit fdb213d39f062ba54ac05327c8c3a5069bcb8898
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Sat May 30 23:33:28 2009 -0500
+
+    added daemonization code
+
+commit 2a0ef0cd41b266083c03fb9fff51941193a6150a
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Sat May 30 19:25:14 2009 -0500
+
+    added sbridge init script and renamed config file
+
+commit ca6760f0e5c4611fe422f90ab1ade328b2ec2fc6
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Sat May 30 18:54:47 2009 -0500
+
+    added environment variables to set the port, host and traces
+
+commit b1a69cae8b30b1e58f26a6ef18df194173099769
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu May 28 22:12:19 2009 -0500
+
+    fixed previous commit compile error due to mtu undefined
+
+commit 9d00a0c9b5b53f3b6df6694c4950c366d443125b
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu May 28 22:10:51 2009 -0500
+
+    added sbridge os abstraction to v110
+
+commit ecc6b3c78a17e0b3dd66f52afeae9db185c1227c
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Fri May 29 04:30:40 2009 +0300
+
+    working tcp code, now all data is sent to the tcp server and read from
+    there, the port and host is hard coded though
+
+commit 6b12cb28549f237253769395faac1c31896b2883
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu May 28 17:24:17 2009 -0500
+
+    added initial TCP connection code
+
+commit c53d098fc7d04b350404d4878b4b30b6943411f9
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Fri May 29 00:03:57 2009 +0300
+
+    Changes to sbridge_v110.c to add pipe buffering (loopback mode)
+
+commit c9684aa18c9bf753149131c4770559571323e7cf
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Thu May 28 11:31:34 2009 -0500
+
+    improvements to v110 data management to integrate it better to sbridge operations
+
+commit 6cfee665f7819c89f7507a323821b2b571d06286
+Author: root <root@modempool.(none)>
+Date:   Thu May 28 09:59:12 2009 +0300
+
+    changes to sbridge_main.c and Makefile.am to use v110
+
+commit 4d4666713fd418d6c79b764b457dea9435c6ea31
+Author: root <root@modempool.(none)>
+Date:   Thu May 28 09:58:40 2009 +0300
+
+    added v110 initial code
+
+commit 7d97e571295baaafc325a166c82be50cd742a54e
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Mon May 25 20:08:42 2009 +0300
+
+    debugging messages added
+
+commit 527b326980d7a9ab3125b689174f990aabe87082
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Sun May 17 09:43:41 2009 +0300
+
+    Implemented media thread playing a file, next step will be the tcp server
+
+commit 01d1cb5497e2c5cd833ec87004de4706bec7b8b7
+Author: Moises Silva <moy@dolphin.localdomain>
+Date:   Sat May 16 19:48:05 2009 -0500
+
+    Added thread routines to sbridge_os.c and usage of sbridge routines to sbridge_main
+
+commit c2189753c1b031965475978e6b20712ef48a05ec
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Fri May 15 04:46:28 2009 +0300
+
+    added a new assert to the configuration file parsing routine
+
+commit 4ac49128df77ec5ccd1bd5438b1e94e2d9521cf8
+Author: tzury bar yochay <tzury@modempool.(none)>
+Date:   Fri May 15 04:41:07 2009 +0300
+
+    Starting sangoma bridge repository

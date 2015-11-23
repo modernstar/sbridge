@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/libpri/!svn/ver/705/branches/1.4/build_tools
+END
+make_version
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/libpri/!svn/ver/705/branches/1.4/build_tools/make_version
+END
+make_version_c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/libpri/!svn/ver/552/branches/1.4/build_tools/make_version_c
+END

@@ -1,0 +1,19 @@
+Pre-Requisites:
+
+- Any recent distro of Linux should work, the init script that works is only the debian/ubuntu one though.
+
+- Wanpipe for Linux (wiki.sangoma.com) 
+  (Install in TDM API mode, wanrouter start wanpipex should create /dev/wpxxx or /dev/wanpipexxxx and not /dev/zap/xx or /dev/dahdi/xxx)
+
+- libpri, the tested version is included in the libpri/ directory, I recommend using that one, don't cry if you run into troubles otherwise.
+
+- sqlite3 (any version)
+
+SBridge installation
+
+1. Run the usual ./configure && make && make install
+
+2. Run the sbridge.install.sh script ( or make a patch for Makefile.am and send me that!) 
+
+3. Read the sbridge.conf file for comments on how to configure it
+

@@ -1,0 +1,73 @@
+#!/bin/bash
+#
+# Init file for the Sangoma Bridge
+#
+# chkconfig: 2345 95 5
+# description: Sangoma Bridge Daemon
+#
+# processname: sbridge
+# config: TODO
+# pidfile: /var/run/sbridge.pid
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+# pull in sysconfig settings
+[ -f /etc/sysconfig/sbridge.conf ] && . /etc/sysconfig/sbridge.conf
+export sbridge_tcp_hostname
+export sbridge_tcp_port
+export sbridge_v110_trace
+
+RETVAL=0
+prog="sbridge"
+
+SBRIDGE_PROGRAM=/usr/bin/sbridge
+# options = span d-chan debug
+OPTIONS="1 16 0"
+PID_FILE=/var/run/sbridge.pid
+
+start()
+{
+	echo -n $"Starting $prog:"
+	wanrouter start wanpipe1
+	$SBRIDGE_PROGRAM $OPTIONS &> /var/log/sbridge.log
+	success || failure
+	RETVAL=$?
+	[ "$RETVAL" = 0 ] && touch /var/lock/subsys/sbridge
+	echo 
+}
+
+stop()
+{
+	echo -n $"Stopping $prog:"
+	wanrouter stop wanpipe1
+	killproc $SBRIDGE_PROGRAM
+	RETVAL=$?
+	[ "$RETVAL" = 0 ] && rm -f /var/lock/subsys/netborder-gateway
+	echo 
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+    		sleep 3
+		start
+		;;
+	condrestart)
+		[ -f /var/lock/subsys/sbridge ] && restart || :
+		;;
+	status)
+		status $SBRIDGE_PROGRAM
+		RETVAL=$?
+		;;
+	*)
+		echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+		RETVAL=1
+esac
+exit $RETVAL

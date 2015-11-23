@@ -1,0 +1,48 @@
+#  SBridge
+#  Sangoma WAN - TCP/IP Bridge
+# 
+#  Author(s):   Moises Silva <moises.silva@gmail.com>
+# 
+#  Copyright:   (c) 2009 Regulus Labs Ltd
+# 
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version
+#  2 of the License, or (at your option) any later version.
+#  
+
+
+AC_INIT([SBridge], [0.0.1])
+
+# AC_CONFIG_SRCDIR ???
+AC_CONFIG_HEADERS(config.h)
+AM_INIT_AUTOMAKE
+
+# let's default to compile with debugging information
+# most users will not even care about it
+CFLAGS='-ggdb3 -O0'
+CXXFLAGS='-ggdb3 -O0'
+
+AC_PROG_CC
+AC_PROG_LIBTOOL
+AC_LANG([C])
+AM_PROG_CC_C_O
+
+AC_CHECK_HEADER([pthread.h],[],[AC_MSG_FAILURE([header pthread.h is required but not present])])
+
+AC_ARG_WITH([debug], [AS_HELP_STRING([--with-debug], 
+	                [Enable development debugging.])],
+	                [with_debug=yes],
+			[with_debug=no])
+AM_CONDITIONAL([WANT_DEBUG], [test "x$with_debug" = xyes])
+if [test "x$with_debug" = "xyes"]
+then
+	AC_MSG_RESULT([sbridge program will be compiled in debug mode])
+else
+	AC_MSG_RESULT([sbridge program will NOT be compiled in debug mode])
+fi
+
+AC_CONFIG_FILES([Makefile
+		src/Makefile])
+
+AC_OUTPUT

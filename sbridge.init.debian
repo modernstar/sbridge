@@ -1,0 +1,88 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		sbridge
+# Required-Start:	$wanrouter $syslog
+# Required-Stop:	$wanrouter $syslog
+# Default-Start:	2 3 4 5
+# Default-Stop:		1
+# Short-Description:	Sangoma Bridge
+### END INIT INFO
+
+set -e
+
+# /etc/init.d/sbridge: start and stop the SBridge daemon
+
+test -x /usr/bin/sbridge || exit 0
+
+if test -f /etc/default/sbridge.conf; then
+    . /etc/default/sbridge.conf
+fi
+
+if [ ! -z $sbridge_database ]
+then
+	export sbridge_database
+fi
+
+if [ ! -z $sbridge_pri_spans ]
+then
+	export sbridge_pri_spans
+fi
+
+if [ ! -z $sbridge_tcp_hosts ]
+then
+	export sbridge_tcp_hosts
+fi
+
+if [ ! -z $sbridge_trace ]
+then
+	export sbridge_trace
+fi
+
+if [ ! -z $sbridge_loglevel ]
+then
+	export sbridge_loglevel
+fi
+
+. /lib/lsb/init-functions
+
+export PATH="${PATH:+$PATH:}/usr/bin:/bin"
+
+case "$1" in
+  start)
+	log_daemon_msg "Starting SBridge server" "sbridge"
+	if start-stop-daemon --start --nicelevel -19 --quiet --oknodo --exec /usr/bin/sbridge --; then
+	    log_end_msg 0
+	else
+	    log_end_msg 1
+	fi
+	;;
+  stop)
+	log_daemon_msg "Stopping SBridge server" "sbridge"
+	if start-stop-daemon --stop --exec /usr/bin/sbridge --quiet --oknodo --signal 9; then
+	    log_end_msg 0
+	else
+	    log_end_msg 1
+	fi
+	;;
+
+  restart)
+	log_daemon_msg "Restarting SBridge server" "sbridge"
+	start-stop-daemon --stop --exec /usr/bin/sbridge --quiet --oknodo --retry 30 
+	if start-stop-daemon --start --quiet --oknodo --exec /usr/bin/sbridge --; then
+	    log_end_msg 0
+	else
+	    log_end_msg 1
+	fi
+	;;
+
+  status)
+	status_of_proc /usr/bin/sbridge sbridge && exit 0 || exit $?
+	;;
+
+  *)
+	log_action_msg "Usage: /etc/init.d/ssh {start|stop|restart|status}"
+	exit 1
+esac
+
+exit 0
